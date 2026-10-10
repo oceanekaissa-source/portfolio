@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Océane - Software Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0914',
+                        cardBg: '#15102a',
+                        cardBorder: '#2d2250',
+                        accentViolet: '#a855f7',
+                        accentGlow: '#9333ea',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles & Animations -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0914;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow & Canvas background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .neon-glow-btn {
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .neon-glow-btn:hover {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-6px);
+            border-color: #a855f7;
+            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.3);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-100 antialiased selection:bg-purple-500 selection:text-white">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/80 border-b border-cardBorder">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#hero" class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                Océane<span class="text-accentViolet">.dev</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-purple-400 transition-colors">À Propos</a>
+                <a href="#services" class="hover:text-purple-400 transition-colors">Services</a>
+                <a href="#projects" class="hover:text-purple-400 transition-colors">Projets</a>
+                <a href="#skills" class="hover:text-purple-400 transition-colors">Compétences</a>
+                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            </nav>
+
+            <a href="#contact" class="neon-glow-btn px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold text-white">
+                Me Contacter
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-32 py-12">
+
+        <section id="hero" class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 pt-8">
+            <div class="flex-1 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-950/40 text-purple-300 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    Disponible pour opportunités & projets
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight tracking-tight">
+                    Bonjour, je suis <br/>
+                    <span class="bg-gradient-to-r from-purple-400 via-indigo-300 to-pink-400 bg-clip-text text-transparent">Océane</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-slate-400 font-normal max-w-xl leading-relaxed">
+                    <strong class="text-purple-300">Software Developer</strong> spécialisée dans la création d'applications web robustes avec PHP & MySQL, et le développement de sites sur-mesure optimisés et performants.
+                </p>
+
+                <!-- Key Metrics / Stats -->
+                <div class="grid grid-cols-2 gap-4 pt-4 max-w-md mx-auto lg:mx-0">
+                    <div class="p-4 rounded-xl bg-cardBg/60 border border-cardBorder text-center">
+                        <span class="text-3xl font-extrabold text-purple-400">2+</span>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Ans d'expérience</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-cardBg/60 border border-cardBorder text-center">
+                        <span class="text-3xl font-extrabold text-purple-400">10+</span>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Projets Réalisés</p>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                    <a href="#projects" class="neon-glow-btn px-6 py-3 rounded-xl font-semibold text-white text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> Voir Mes Projets
+                    </a>
+                    <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-sm border border-cardBorder bg-cardBg/50 hover:bg-cardBg transition-all text-slate-200 hover:text-white">
+                        Discuter d'un projet
+                    </a>
+                </div>
+            </div>
+
+            <!-- Profile Picture with Glow Effect -->
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-purple-500/50 shadow-2xl bg-cardBg">
+                    <img src="image_3.png" alt="Océane - Software Developer" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/400x400/2d2250/a855f7?text=Oceane'">
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-purple-400">Ce que je propose</h2>
+                <p class="text-3xl font-bold">Mes Services de Développement</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-2xl bg-cardBg border border-cardBorder card-hover space-y-4">
+                    <div class="w-14 h-14 rounded-xl bg-purple-900/50 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100">Développement Full-Stack PHP</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Conception et développement de solutions web backend et frontend sur-mesure. Gestion d'architectures complètes, structuration de bases de données relationnelles MySQL et écriture d'un code propre et évolutif.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-2xl bg-cardBg border border-cardBorder card-hover space-y-4">
+                    <div class="w-14 h-14 rounded-xl bg-purple-900/50 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100">Création de Sites Web & Vitrines</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Intégration d'interfaces adaptatives, fluides et légères en HTML5, CSS3 et JavaScript. Vos visiteurs bénéficient d'une expérience utilisateur réactive sur ordinateur, tablette et smartphone.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-purple-400">Portfolio</h2>
+                <p class="text-3xl font-bold">Projets Récents</p>
+            </div>
+
+            <!-- Project Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-cardBg border border-cardBorder rounded-2xl overflow-hidden card-hover flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="w-full h-44 rounded-xl bg-gradient-to-br from-purple-900/40 to-slate-900 flex items-center justify-center border border-purple-500/20">
+                            <i class="fa-solid fa-cart-shopping text-5xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Plateforme E-Commerce PHP</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Application web dynamique de vente en ligne avec catalogue de produits, panier d'achat interactif et panneau d'administration sécurisé.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">MySQL</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-cardBg border border-cardBorder rounded-2xl overflow-hidden card-hover flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="w-full h-44 rounded-xl bg-gradient-to-br from-indigo-900/40 to-slate-900 flex items-center justify-center border border-indigo-500/20">
+                            <i class="fa-solid fa-list-check text-5xl text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Outil de Gestion de Projets</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Application web CRUD permettant l'organisation des tâches d'équipe, le suivi de progression et la gestion des priorités.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">MySQL</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">CSS3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-cardBg border border-cardBorder rounded-2xl overflow-hidden card-hover flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="w-full h-44 rounded-xl bg-gradient-to-br from-pink-900/40 to-slate-900 flex items-center justify-center border border-pink-500/20">
+                            <i class="fa-solid fa-building text-5xl text-pink-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Site Vitrine d'Entreprise</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Site internet responsive à haute performance, intégrant un formulaire de contact dynamique et des animations fluides.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">HTML5</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">CSS3</span>
+                            <span class="px-2.5 py-1 rounded-md text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-purple-400">Expertise Technique</h2>
+                <p class="text-3xl font-bold">Mes Compétences Clés</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <!-- PHP -->
+                <div class="p-6 rounded-2xl bg-cardBg border border-cardBorder text-center card-hover space-y-3">
+                    <div class="text-4xl text-indigo-400"><i class="fa-brands fa-php"></i></div>
+                    <h4 class="font-bold">PHP</h4>
+                    <span class="inline-block text-xs text-purple-300 font-medium">Avancé</span>
+                </div>
+
+                <!-- MySQL -->
+                <div class="p-6 rounded-2xl bg-cardBg border border-cardBorder text-center card-hover space-y-3">
+                    <div class="text-4xl text-blue-400"><i class="fa-solid fa-database"></i></div>
+                    <h4 class="font-bold">MySQL</h4>
+                    <span class="inline-block text-xs text-purple-300 font-medium">Bases de données</span>
+                </div>
+
+                <!-- HTML5 -->
+                <div class="p-6 rounded-2xl bg-cardBg border border-cardBorder text-center card-hover space-y-3">
+                    <div class="text-4xl text-orange-400"><i class="fa-brands fa-html5"></i></div>
+                    <h4 class="font-bold">HTML5</h4>
+                    <span class="inline-block text-xs text-purple-300 font-medium">Structure Web</span>
+                </div>
+
+                <!-- CSS3 -->
+                <div class="p-6 rounded-2xl bg-cardBg border border-cardBorder text-center card-hover space-y-3">
+                    <div class="text-4xl text-sky-400"><i class="fa-brands fa-css3-alt"></i></div>
+                    <h4 class="font-bold">CSS3</h4>
+                    <span class="inline-block text-xs text-purple-300 font-medium">Stylisation</span>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="p-6 rounded-2xl bg-cardBg border border-cardBorder text-center card-hover space-y-3 col-span-2 md:col-span-1">
+                    <div class="text-4xl text-yellow-400"><i class="fa-brands fa-js"></i></div>
+                    <h4 class="font-bold">JavaScript</h4>
+                    <span class="inline-block text-xs text-purple-300 font-medium">Interactivité</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="space-y-12">
+            <div class="max-w-2xl mx-auto bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl space-y-8 relative overflow-hidden">
+                <div class="text-center space-y-3">
+                    <h2 class="text-3xl font-bold">Travaillons Ensemble</h2>
+                    <p class="text-slate-400 text-sm">
+                        Un projet web en tête ou une question ? Laissez-moi un message !
+                    </p>
+                </div>
+
+                <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-slate-300">Votre Nom</label>
+                        <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-darkBg border border-cardBorder focus:border-purple-500 focus:outline-none text-sm text-slate-100 placeholder-slate-600 transition-colors">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-slate-300">Votre Email</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-darkBg border border-cardBorder focus:border-purple-500 focus:outline-none text-sm text-slate-100 placeholder-slate-600 transition-colors">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-slate-300">Votre Message</label>
+                        <textarea required rows="4" placeholder="Décrivez votre projet..." class="w-full px-4 py-3 rounded-xl bg-darkBg border border-cardBorder focus:border-purple-500 focus:outline-none text-sm text-slate-100 placeholder-slate-600 transition-colors resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full neon-glow-btn py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider text-white">
+                        Envoyer le message
+                    </button>
+                </form>
+
+                <!-- Feedback Message Notification -->
+                <div id="formSuccess" class="hidden text-center p-4 rounded-xl bg-green-950/60 border border-green-500/40 text-green-300 text-sm font-medium">
+                    <i class="fa-solid fa-circle-check mr-2"></i> Merci ! Votre message a été envoyé avec succès.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-cardBorder mt-20 py-8 bg-darkBg/90">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <p>© 2026 Océane. Tous droits réservés.</p>
+            <div class="flex items-center space-x-6 text-base">
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:contact@oceane.dev" class="hover:text-purple-400 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Canvas Animation Background
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.min(Math.PI * 2, 10));
+                ctx.fillStyle = 'rgba(168, 85, 247, 0.4)';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.12 - dist / 1000})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.onload = function() {
+            animateCanvas();
+        };
+
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const successMsg = document.getElementById('formSuccess');
+            
+            form.reset();
+            successMsg.classList.remove('hidden');
+            
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
